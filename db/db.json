@@ -1,0 +1,10 @@
+{
+    "alumnos":[{
+            "id":"01",
+            "escuela_id":"05",
+            "nombre":"Luis",
+            "apellido": "de alba",
+            "curp": "CSDASD12312CDS2CD"
+        }
+    ]
+}

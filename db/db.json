@@ -1,10 +1,108 @@
 {
     "alumnos":[{
             "id":"01",
-            "escuela_id":"05",
-            "nombre":"Luis",
-            "apellido": "de alba",
-            "curp": "CSDASD12312CDS2CD"
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "Fer",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
+        },
+        {
+            "id":"02",
+            "tipo_de_solicitud":"CAMBIO DE DOMICILIO",
+            "nivel":"LICENCIATURA",
+            "plan_de_estudios": "DERECHO",
+            "modalidad": "MIXTA",
+            "periodo": "CUATRIMESTRAL",
+            "turno": "MATUTINO, VESPERTINO",
+            "institucion": "CENTRO UNIVERSITARIO UNE",
+            "alumno": "lalo",
+            "fechas": "12/12/23",
+            "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
         }
+        
     ]
 }

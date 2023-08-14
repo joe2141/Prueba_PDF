@@ -69,10 +69,10 @@ const headers = ["Alumnos", "Fechas", "Programa de estudios", "Acciones"];
             lineColor: [44, 62, 80],
       lineWidth: 1,
           },headStyles: {
-            fillColor: [241, 196, 15],
-            fontSize: 15,
-          },
-          
+      fillColor: [241, 196, 15],
+      fontSize: 15,
+    },
+    showHead: 'firstPage'
         });
 
         const pdfBlob = doc.output("blob");

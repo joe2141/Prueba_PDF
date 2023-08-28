@@ -51,6 +51,8 @@ function App() {
       });
     }
 
+    let currentPositionY = 77;
+
     function crearCelda(doc, x, y, width, height, texto) {
       doc.setFillColor(172, 178, 183);
       doc.rect(x, y, width, height, 'F');
@@ -64,6 +66,38 @@ function App() {
       const textoX = x + (width - textoWidth) / 2; // Calcula la posición X centrada
   
       doc.text(texto, textoX, y + 5); // Usar la posición X centrada
+  }
+
+  function crearSeccion(doc, contenido) {
+    const margenIzquierdo = 20;
+    const margenSuperior = currentPositionY;
+  
+    // Contenido de la sección
+    doc.setFont("helvetica");
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(contenido, margenIzquierdo, margenSuperior, { align: 'justify', maxWidth: 175 });
+  
+    currentPositionY += doc.getTextDimensions(contenido, { maxWidth: 175 }).h + 5; // Espacio después de cada sección
+  }
+
+  function crearSeccionConTexto(doc, titulo, contenido) {
+    crearCelda(
+      doc,
+      20,     // cellX
+      currentPositionY, // cellY
+      176,    // cellWidth
+      7,      // cellHeight
+      titulo
+    );
+  
+    doc.setFont("helvetica");
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(contenido, 20, currentPositionY + 15, { align: 'justify', maxWidth: 175 });
+  
+    const textHeight = doc.getTextDimensions(contenido, { maxWidth: 175 }).h;
+    currentPositionY += textHeight + 20; // Espacio después del texto
   }
 
     async function generatePDF(datos, callback) {
@@ -85,110 +119,30 @@ function App() {
           `${primerDato.institucion} 
 ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
 
-        doc.setFont("helvetica");
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.text(
-          `Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE 
-${primerDato.tipo_de_solicitud} del programa ${primerDato.nivel} en ${primerDato.plan_de_estudios}, modalidad ${primerDato.modalidad}, en periodos
-${primerDato.periodo}, turno ${primerDato.turno}, de la Institución ${primerDato.institucion}.`,20,77,{ align: 'justify', maxWidth: 175 });
+         crearSeccion(
+      doc,
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+    );
 
-        const headers1 = [
-          "NOMBRE DE LA INSTITUCIÓN",
-          "MODALIDAD",
-          "DURACIÓN DEL CICLO",
-          "DURACIÓN DEL PLAN DE ESTUDIOS",
-        ];
-        const dataColumn1 = [ primerDato.institucion,
-          primerDato.modalidad,
-          primerDato.ciclo,
-          primerDato.fechas,];
+    crearSeccionConTabla(doc, primerDato);
 
-        const tableData1 = headers1.map((header, index) => [
-          header,
-          dataColumn1[index],
-        ]);
-        doc.autoTable({
-          body: tableData1,
-          startY: 96,
-          margin: { right: 40,
-          left: 40, },
-          theme: "grid",
-          styles: {
-            lineColor: [0, 0, 0],
-            lineWidth: 0.3,
-          },
-          headStyles: {
-            fontSize: 15,
-          },
-          showHead: false,
-          columnStyles: {
-            0: {
-              fillColor: [172, 178, 183],
-            },
-            1: {
-              fontStyle: "bold",
-            },
-          },
-        });
+    crearSeccionConTexto(
+      doc,
+      "1. ANTECEDENTES ACADÉMICOS DE INGRESO",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+    );
 
-        crearCelda(
-          doc,
-          20,     // cellX
-          133,    // cellY
-          176,    // cellWidth
-          7,      // cellHeight
-          "1. ANTECEDENTES ACADÉMICOS DE INGRESO"
-      );
+    crearSeccionConTexto(
+      doc,
+      "2. PERFIL DE INGRESO",
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+    );
 
-      doc.setFont("helvetica");
-      doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0);
-      doc.text(
-        `Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE 
-${primerDato.tipo_de_solicitud} del programa ${primerDato.nivel} en ${primerDato.plan_de_estudios}, modalidad ${primerDato.modalidad}, en periodos
-${primerDato.periodo}, turno ${primerDato.turno}, de la Institución ${primerDato.institucion}.`,20,148,{ align: 'justify', maxWidth: 175 });
-
-crearCelda(
-  doc,
-  20,     // cellX
-  160,    // cellY
-  176,    // cellWidth
-  7,      // cellHeight
-  "2. PERFIL DE INGRESO"
-);
-doc.setFont("helvetica");
-      doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0);
-      doc.text(
-        `Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE 
-${primerDato.tipo_de_solicitud} del programa ${primerDato.nivel} en ${primerDato.plan_de_estudios}, modalidad ${primerDato.modalidad}, en periodos
-${primerDato.periodo}, turno ${primerDato.turno}, de la Institución ${primerDato.institucion}.`,20,175,{ align: 'justify', maxWidth: 175 });
-
-crearCelda(
-  doc,
-  20,     // cellX
-  187,    // cellY
-  176,    // cellWidth
-  7,      // cellHeight
-  "3. PERFIL DE INGRESO"
-);
-    
-crearCelda(
-  doc,
-  20,     // cellX
-  193,    // cellY
-  176,    // cellWidth
-  7,      // cellHeight
-  "comentarios:"
-);
-doc.setFont("helvetica");
-      doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0);
-      doc.text(
-        `Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE 
-${primerDato.tipo_de_solicitud} del programa ${primerDato.nivel} en ${primerDato.plan_de_estudios}, modalidad ${primerDato.modalidad}, en periodos
-${primerDato.periodo}, turno ${primerDato.turno}, de la Institución ${primerDato.institucion}.`,20,205,{ align: 'justify', maxWidth: 175 });
+    crearSeccionConTexto(
+      doc,
+      "3. PERFIL DE INGRESO",
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat"
+    );
       
 
         // const headers = [
@@ -238,6 +192,51 @@ for (let i = 1; i <= totalPages; i++) {
         const pdfBlob = doc.output("blob");
         callback(pdfBlob);
       }
+    }
+
+    function crearSeccionConTabla(doc, primerDato) {
+      const headers1 = [
+        "NOMBRE DE LA INSTITUCIÓN",
+        "MODALIDAD",
+        "DURACIÓN DEL CICLO",
+        "DURACIÓN DEL PLAN DE ESTUDIOS",
+      ];
+      const dataColumn1 = [
+        primerDato.institucion,
+        primerDato.modalidad,
+        primerDato.ciclo,
+        primerDato.fechas,
+      ];
+    
+      const tableData1 = headers1.map((header, index) => [
+        header,
+        dataColumn1[index],
+      ]);
+    
+      doc.autoTable({
+        body: tableData1,
+        startY: currentPositionY,
+        margin: { right: 40, left: 40 },
+        theme: "grid",
+        styles: {
+          lineColor: [0, 0, 0],
+          lineWidth: 0.3,
+        },
+        headStyles: {
+          fontSize: 15,
+        },
+        showHead: false,
+        columnStyles: {
+          0: {
+            fillColor: [172, 178, 183],
+          },
+          1: {
+            fontStyle: "bold",
+          },
+        },
+      });
+    
+      currentPositionY = doc.previousAutoTable.finalY + 10 ; // Espacio después de la tabla
     }
 
     async function fetchDataAndGeneratePDF() {

@@ -179,30 +179,32 @@ ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
         // });
 
 
-        const imgBottomLeftX = 10; // Posición X de la imagen
-        const imgBottomLeftY = doc.internal.pageSize.height - 10; // Posición Y de la imagen
-        const imgBottomLeftWidth = 18; // Ancho de la imagen
-        const imgBottomLeftHeight = 18; // Alto de la imagen
-
-        doc.addImage(img3, "JPEG", imgBottomLeftX, imgBottomLeftY - imgBottomLeftHeight, imgBottomLeftWidth, imgBottomLeftHeight);
-
         const totalPages = doc.internal.getNumberOfPages();
-for (let i = 1; i <= totalPages; i++) {
-  doc.setPage(i);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
-
-  const pageWidth = doc.internal.pageSize.width;
-  const pageHeight = doc.internal.pageSize.height;
-
-  const pageNumberText = `Página ${i} de ${totalPages}`;
-  const pageNumberTextWidth = doc.getStringUnitWidth(pageNumberText) * doc.internal.getFontSize() / doc.internal.scaleFactor;
-  const pageNumberTextX = pageWidth - 20 - pageNumberTextWidth;
-  const pageNumberTextY = pageHeight - 10;
-
-  doc.text(pageNumberText, pageNumberTextX, pageNumberTextY);
-}
+        for (let i = 1; i <= totalPages; i++) {
+          doc.setPage(i);
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(10);
+          doc.setTextColor(0, 0, 0);
+    
+          const pageWidth = doc.internal.pageSize.width;
+          const pageHeight = doc.internal.pageSize.height;
+    
+          const pageNumberText = `Página ${i} de ${totalPages}`;
+          const pageNumberTextWidth = doc.getStringUnitWidth(pageNumberText) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+          const pageNumberTextX = pageWidth - 20 - pageNumberTextWidth;
+          const pageNumberTextY = pageHeight - 10;
+    
+          doc.text(pageNumberText, pageNumberTextX, pageNumberTextY);
+    
+          // Agregar imagen en el pie de página
+          const imgBottomLeftX = 10; // Posición X de la imagen
+          const imgBottomLeftY = pageHeight - 10; // Posición Y de la imagen
+          const imgBottomLeftWidth = 18; // Ancho de la imagen
+          const imgBottomLeftHeight = 18; // Alto de la imagen
+    
+          doc.addImage(img3, "JPEG", imgBottomLeftX, imgBottomLeftY - imgBottomLeftHeight, imgBottomLeftWidth, imgBottomLeftHeight);
+        }
+    
 
         const pdfBlob = doc.output("blob");
         callback(pdfBlob);

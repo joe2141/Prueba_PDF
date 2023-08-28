@@ -28,6 +28,7 @@ function App() {
     "data:image/png;base64,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";
     const img3 = "https://pbs.twimg.com/profile_images/1587466002241134594/RCTlvwMC_400x400.jpg";
 
+    let currentPositionY = 77;
 
     function generateTable(
       doc,
@@ -50,8 +51,6 @@ function App() {
         showHead: showHead,
       });
     }
-
-    let currentPositionY = 77;
 
     function crearCelda(doc, x, y, width, height, texto) {
       doc.setFillColor(172, 178, 183);
@@ -76,12 +75,22 @@ function App() {
     doc.setFont("helvetica");
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text(contenido, margenIzquierdo, margenSuperior, { align: 'justify', maxWidth: 175 });
+    const textHeight = doc.getTextDimensions(contenido, { maxWidth: 175 }).h;
   
-    currentPositionY += doc.getTextDimensions(contenido, { maxWidth: 175 }).h + 5; // Espacio después de cada sección
+    if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
+      doc.addPage();
+      currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+    }
+  
+    doc.text(contenido, margenIzquierdo, currentPositionY, { align: 'justify', maxWidth: 175 });
+  
+    currentPositionY += textHeight + 5; // Espacio después de cada sección
   }
 
   function crearSeccionConTexto(doc, titulo, contenido) {
+    const margenSuperior = currentPositionY;
+  
+    // Titulo de la sección
     crearCelda(
       doc,
       20,     // cellX
@@ -91,12 +100,18 @@ function App() {
       titulo
     );
   
+    const textHeight = doc.getTextDimensions(contenido, { align: 'justify', maxWidth: 175 }).h;
+  
+    if (currentPositionY + textHeight + 25 > doc.internal.pageSize.height - 20) {
+      doc.addPage();
+      currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+    }
+  
     doc.setFont("helvetica");
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
     doc.text(contenido, 20, currentPositionY + 15, { align: 'justify', maxWidth: 175 });
   
-    const textHeight = doc.getTextDimensions(contenido, { maxWidth: 175 }).h;
     currentPositionY += textHeight + 20; // Espacio después del texto
   }
 
@@ -166,8 +181,8 @@ ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
 
         const imgBottomLeftX = 10; // Posición X de la imagen
         const imgBottomLeftY = doc.internal.pageSize.height - 10; // Posición Y de la imagen
-        const imgBottomLeftWidth = 20; // Ancho de la imagen
-        const imgBottomLeftHeight = 20; // Alto de la imagen
+        const imgBottomLeftWidth = 18; // Ancho de la imagen
+        const imgBottomLeftHeight = 18; // Alto de la imagen
 
         doc.addImage(img3, "JPEG", imgBottomLeftX, imgBottomLeftY - imgBottomLeftHeight, imgBottomLeftWidth, imgBottomLeftHeight);
 
@@ -213,8 +228,7 @@ for (let i = 1; i <= totalPages; i++) {
         dataColumn1[index],
       ]);
     
-      doc.autoTable({
-        body: tableData1,
+      const tableOptions = {
         startY: currentPositionY,
         margin: { right: 40, left: 40 },
         theme: "grid",
@@ -234,9 +248,21 @@ for (let i = 1; i <= totalPages; i++) {
             fontStyle: "bold",
           },
         },
+      };
+    
+      const textHeight = doc.getTextDimensions(tableData1.join('\n'), tableOptions).h;
+    
+      if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
+        doc.addPage();
+        currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+      }
+    
+      doc.autoTable({
+        body: tableData1,
+        ...tableOptions,
       });
     
-      currentPositionY = doc.previousAutoTable.finalY + 10 ; // Espacio después de la tabla
+      currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
     }
 
     async function fetchDataAndGeneratePDF() {

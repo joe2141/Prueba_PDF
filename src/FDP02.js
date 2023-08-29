@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
-function App() {
+function FDP02() {
   useEffect(() => {
     async function fetchData() {
       const requestOptions = {
@@ -292,4 +292,4 @@ ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
   );
 }
 
-export default App;
+export default FDP02;

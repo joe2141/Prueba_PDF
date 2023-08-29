@@ -1,24 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Link } from 'react-router-dom';
 
 function Home() {
-
   return (
     <div>
       <ul>
-        <li><a href="#FDA01">FDA01</a></li>
-        <li><a href="#FDA02">FDA02</a></li>
-        <li><a href="#FDA03">FDA03</a></li>
-        <li><a href="#FDA04">FDA04</a></li>
-        <li><a href="#FDA05">FDA05</a></li>
-        <li><a href="#FDA06">FDA06</a></li>
-        <li><a href="#FDP01">FDP01</a></li>
-        <li><a href="#FDP02">FDP02</a></li>
-        <li><a href="#FDP03">FDP03</a></li>
-        <li><a href="#FDP04">FDP04</a></li>
-        <li><a href="#FDP05">FDP05</a></li>
+        
+        <li><Link to="/FDA01">FDA01</Link></li>
+        <li><Link to="/FDA02">FDA02</Link></li>
+
+        <li><Link to="/FDP02">FDP02</Link></li>
       </ul>
     </div>
   );
-
 }
+
 export default Home;

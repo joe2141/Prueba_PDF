@@ -160,23 +160,23 @@ ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
     );
       
 
-        // const headers = [
-        //   "Alumnos",
-        //   "Fechas",
-        //   "Programa de estudios",
-        //   "Acciones",
-        // ];
-        // const tableData = datos.map((dato) => [
-        //   dato.alumno,
-        //   dato.fechas,
-        //   dato.plan_de_estudios,
-        //   dato.acciones,
-        // ]);
+        const headers = [
+          "Alumnos",
+          "Fechas",
+          "Programa de estudios",
+          "Acciones",
+        ];
+        const tableData = datos.map((dato) => [
+          dato.alumno,
+          dato.fechas,
+          dato.plan_de_estudios,
+          dato.acciones,
+        ]);
 
-        // generateTable(doc, headers, tableData, 500, {
-        //   fillColor: [241, 196, 15],
-        //   fontSize: 15,
-        // });
+        generateTable(doc, headers, tableData, 500, {
+          fillColor: [241, 196, 15],
+          fontSize: 15,
+        });
 
 
         const totalPages = doc.internal.getNumberOfPages();
@@ -219,7 +219,7 @@ ${primerDato.nivel} EN ${primerDato.plan_de_estudios}`,60,59);
         "DURACIÓN DEL PLAN DE ESTUDIOS",
       ];
       const dataColumn1 = [
-        primerDato.institucion,
+        "NOMBRE DE LA INSTITUCIÓN",
         primerDato.modalidad,
         primerDato.ciclo,
         primerDato.fechas,

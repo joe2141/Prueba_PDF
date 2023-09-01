@@ -42,6 +42,7 @@ function FDA02() {
       showHead
     ) {
       doc.autoTable({
+        
         head: [headers],
         body: tableData,
         startY: startY,
@@ -73,8 +74,6 @@ function FDA02() {
   
       doc.text(texto, textoX, y + 5); // Usar la posición X centrada
   }
-
-
 
 
   function crearSeccion(doc, contenido, alineacion = 'justify') {
@@ -132,6 +131,52 @@ function FDA02() {
   }
 
 
+  
+  
+  function crearSeccionConDosFilas(doc, contenidoPrimeraFila, contenidoSegundaFila) {
+    const margenIzquierdo = 20;
+    const margenSuperior = currentPositionY;
+  
+    // Tamaño de celda y altura de texto
+    const celdaAncho = 35; // Ancho total
+    const celdaAlto = 10;
+    const textoAltura = 4;
+  
+    // Primera fila con fondo gris y borde
+    doc.setFillColor(172, 178, 183); // Color gris
+    doc.rect(margenIzquierdo, currentPositionY, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
+  
+    // Contenido de la primera fila
+    doc.setFont("helvetica");
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(contenidoPrimeraFila, margenIzquierdo + 1, currentPositionY + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
+  
+    const textHeightPrimeraFila = textoAltura;
+  
+    if (currentPositionY + celdaAlto + textHeightPrimeraFila + 10 > doc.internal.pageSize.height - 20) {
+      doc.addPage();
+      currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+    }
+  
+    // Segunda fila con fondo blanco y borde
+    doc.setFillColor(255, 255, 255); // Color blanco
+    doc.rect(margenIzquierdo, currentPositionY + celdaAlto, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
+  
+    // Contenido de la segunda fila
+    doc.setFont("helvetica");
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(contenidoSegundaFila, margenIzquierdo + 1, currentPositionY + celdaAlto + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
+  
+    const textHeightSegundaFila = textoAltura;
+  
+    currentPositionY += celdaAlto * 2 + Math.max(textHeightPrimeraFila, textHeightSegundaFila) + 15; // Espacio después del texto
+}
+
+  
+    
+  
 
 
     async function generatePDF(datos, callback) {
@@ -159,35 +204,104 @@ function FDA02() {
 
         
         crearSeccionConTabla(doc, primerDato);
+        
+        const headers = [
+          "NIVEL DE ESTUDIO",
+          "TURNO",
+          "MODALIDAD",
+          "CICLO",
+        ];
+        const tableData = [
+          ['TÉCNICO SUPERIOR UNIVERSITARIO', 'MIXTO', 'ESCOLARIZADA', 'CUATRIMESTRAL']
+        ];
+        generateTable(doc, headers, tableData, currentPositionY + 5, {
+          fillColor: [172, 178, 183],
+          fontSize: 12,
+          textColor: [20, 20, 20],
 
-         crearSeccion(
-      doc,
-      "Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE CAMBIO DE DOMICILIO del programa LICENCIATURA en DERECHO, modalidad MIXTA, en periodos CUATRIMESTRAL, turno MATUTINO, VESPERTINO, de la Institución CENTRO UNIVERSITARIO UNE. Así mismo declaro Bajo Protesta de Decir la Verdad que la información y los documentos anexos en la presente solicitud son verídicos y fueron elaborados siguiendo principios éticos profesionales, que son de mi conocimiento las penas en que incurren quienes se conducen con falsedad ante autoridad distinta de la judicial, y señalo como domicilio para recibir notificaciones:"
-    );
+        });
 
-    crearSeccion(
-      doc,
-      `Calle / Av. CHIMALHUACÁN, N° 6, Col. CIUDAD DEL SOL, Municipio ZAPOPAN.
-Número telefónico particular: 80000863
-Número telefónico celular: 80000863`,
-      'left' // Al cambiar esto a 'right', el contenido se alineará a la derecha
-    );
+        currentPositionY = doc.previousAutoTable.finalY -10;
+        
+        const headers1 = [
+          "CALLE Y NÚMERO",
+          "COLONIA",
+        ];
+        const tableData1 = [
+          ['TÉCNICO SUPERIOR UNIVERSITARIO', 'MIXTO',]
+        ];
+        generateTable(doc, headers1, tableData1, currentPositionY + 20, {
+          fillColor: [172, 178, 183],
+          fontSize: 12,
+          textColor: [20, 20, 20],
 
-    crearSeccion(
-      doc,
-      `Quedo enterado de todas las disposiciones establecidas en la Ley General de Educación, La Ley General de Educación Superior, de Educación del Estado Libre y Soberano de Jalisco, la Ley de Educación Superior del Estado de Jalisco, así como del para obtención de Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco.`,
-      'justify',
-    );
+        });
 
-    currentPositionY += 50;
+        currentPositionY = doc.previousAutoTable.finalY - 20;
+        
+        const headers2 = [
+          "CÓDIGO POSTAL",
+          "DELEGACIÓN O MUNICIPIO",
+          "ENTIDAD FEDERATIVA",
 
-    crearSeccion(
-      doc,
-      `                                                   BAJO PROTESTA DE DECIR VERDAD
-                                                      GUILLERMO GÓNGORA CHALITA`,
-      'left'
-    );
-    
+        ];
+        const tableData2 = [
+          ['47504', 'LAGOS DE MORENO', 'JALISCO']
+        ];
+        generateTable(doc, headers2, tableData2, currentPositionY + 20, {
+          fillColor: [172, 178, 183],
+          fontSize: 12,
+          textColor: [20, 20, 20],
+
+        });
+
+        currentPositionY = doc.previousAutoTable.finalY - 20;
+        
+        const headers3 = [
+          "NÚMERO TELEFÓNICO",
+          "REDES SOCIALES",
+          "CORREO ELECTRÓNICO",
+
+        ];
+        const tableData3 = [
+          ['4491910926,\n3787900984,\n4747466124', 'https://sicyt.jalisco.gob.mx/obtencion-o-actualizacion-del-rvoe', 'primercorre@gmail.com,\nsegundocorre@gmail.com,\ntercercorre@gmail.com']
+        ];
+        generateTable(doc, headers3, tableData3, currentPositionY + 20, {
+          fillColor: [172, 178, 183],
+          fontSize: 12,
+          textColor: [20, 20, 20],
+
+        });
+
+
+
+        
+        // crearSeccionConDosFilas(
+        //   doc,
+        //   "NIVEL DE ESTUDIO",
+        //   "Contenido de la segunda fila."
+        // );
+
+        // crearSeccionConDosFilas(
+        //   doc,
+        //   "NIVEL DE ESTUDIO",
+        //   "Contenido de la segunda fila."
+        // );
+        
+        
+        // crearSeccionConDosFilas(
+        //   doc,
+        //   "NIVEL DE ESTUDIO",
+        //   "Contenido de la segunda fila."
+        // );
+
+
+        // crearSeccionConDosFilas(
+        //   doc,
+        //   "NIVEL DE ESTUDIO",
+        //   "Contenido de la segunda fila."
+        // );
+        
     function crearSeccionConTabla(doc, primerDato) {
       const headers1 = [
         "NOMBRE DE LA INSTITUCIÓN",
@@ -274,62 +388,6 @@ Número telefónico celular: 80000863`,
         const pdfBlob = doc.output("blob");
         callback(pdfBlob);
       }
-    }
-
-    function crearSeccionConTabla(doc, primerDato) {
-      const headers1 = [
-        "NOMBRE DE LA INSTITUCIÓN",
-        "MODALIDAD",
-        "DURACIÓN DEL CICLO",
-        "DURACIÓN DEL PLAN DE ESTUDIOS",
-      ];
-      const dataColumn1 = [
-        primerDato.institucion,
-        primerDato.modalidad,
-        primerDato.ciclo,
-        primerDato.fechas,
-      ];
-    
-      const tableData1 = headers1.map((header, index) => [
-        header,
-        dataColumn1[index],
-      ]);
-    
-      const tableOptions = {
-        startY: currentPositionY,
-        margin: { right: 40, left: 40 },
-        theme: "grid",
-        styles: {
-          lineColor: [0, 0, 0],
-          lineWidth: 0.3,
-        },
-        headStyles: {
-          fontSize: 15,
-        },
-        showHead: false,
-        columnStyles: {
-          0: {
-            fillColor: [172, 178, 183],
-          },
-          1: {
-            fontStyle: "bold",
-          },
-        },
-      };
-    
-      const textHeight = doc.getTextDimensions(tableData1.join('\n'), tableOptions).h;
-    
-      if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
-        doc.addPage();
-        currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
-      }
-    
-      doc.autoTable({
-        body: tableData1,
-        ...tableOptions,
-      });
-    
-      currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
     }
 
     async function fetchDataAndGeneratePDF() {

@@ -304,48 +304,55 @@ function crearSeccionConTabla(doc, primerDato) {
         doc.setFont("helvetica", "bold");
         doc.setFontSize(12);
         doc.setFillColor(6, 98, 211)
-        crearCelda(doc, 150, 40, 45, 7, "FDA02");
+        crearCelda(doc, 150, 40, 45, 7, "FDA04");
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(12);
         doc.setTextColor(69, 133, 244);
-        doc.text(`SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS`, 20, 55);
+        doc.text(`DESCRIPCIÓN DE LAS INSTALACIONES`, 20, 55);
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         doc.text(`${primerDato.fechas}`, 152, 65);
 
-        
-        crearSeccionConTabla(doc, primerDato);
-        
-        const headers = [
-          "NIVEL DE ESTUDIO",
-          "TURNO",
-          "MODALIDAD",
-          "CICLO",
-        ];
-        const tableData = [
-          ['TÉCNICO SUPERIOR UNIVERSITARIO', 'MIXTO', 'ESCOLARIZADA', 'CUATRIMESTRAL']
-        ];
-        generateTable(doc, headers, tableData, currentPositionY + 5, {
-          fillColor: [172, 178, 183],
-          fontSize: 12,
-          textColor: [20, 20, 20],
 
+        const tablaData1 = {
+          headers: ["Nombre", "datos"],
+          body: [
+            ['NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS', 'TÉCNICO SUPERIOR UNIVERSITARIO EN HOTELERÍA'],
+            ['MODALIDAD', 'ESCOLARIZADA'],
+            ['DURACIÓN DEL PROGRAMA', 'PERIODOS CUATRIMESTRALES'],
+            ['NOMBRE COMPLETO DE LA PERSONA FÍSICA O JURIDICA', 'ADRIANA DE LOS REYES MORENO'],
+          ],
+          showHead: false,
+          columnStyles: {
+            0: {
+              fillColor: [172, 178, 183],
+            },
+            1: {
+              fontStyle: "bold",
+            },
+          },
+        };
+        
+        crearSeccionConTabla1(doc, "1. DATOS DEL PLAN DE ESTUDIOS", tablaData1, {
+          spaceBeforeTable: 7,
+          ...tablaData1, // Pasa los estilos de la tabla como parte de las opciones
         });
 
+        currentPositionY = doc.previousAutoTable.finalY + 5;
 
-        currentPositionY = doc.previousAutoTable.finalY + 5; // Espacio después de la celda
 
-        const tablaData4 = {
+
+        const tablaData2 = {
           headers: ["CALLE Y NÚMERO", "COLONIA"],
           body: [
             ['TÉCNICO SUPERIOR UNIVERSITARIO', 'MIXTO'],
           ],
         };
         
-        crearSeccionConTabla1(doc, "DOMICILIO DE LA INSTITUCIÓN", tablaData4, { spaceBeforeTable: 7 });
+        crearSeccionConTabla1(doc, "2. DOMICILIO DE LA INSTITUCIÓN", tablaData2, { spaceBeforeTable: 7 });
 
 
         currentPositionY = doc.previousAutoTable.finalY - 20;
@@ -384,236 +391,78 @@ function crearSeccionConTabla(doc, primerDato) {
 
         });
         
-        
 
+    currentPositionY = doc.previousAutoTable.finalY + 10;
 
-        
-        // crearSeccionConDosFilas(
-        //   doc,
-        //   "NIVEL DE ESTUDIO",
-        //   "Contenido de la segunda fila."
-        // );
+    const tablaData4 = {
+      headers: ["CARACTERISTICAS DEL INMUEBLE", "EDIFICIOS Y/O NIVELES"],
+      body: [
+        ['CONSTRUIDO', 'PRIMER PISO'], 
+        ['', 'SEGUNDO PISO'], 
+      ],
+    };
+    
+    crearSeccionConTabla1(doc, "3. DESCRIPCIÓN DEL PLANTEL", tablaData4, { spaceBeforeTable: 7 });
 
-        // crearSeccionConDosFilas(
-        //   doc,
-        //   "NIVEL DE ESTUDIO",
-        //   "Contenido de la segunda fila."
-        // );
-        
-        
-        // crearSeccionConDosFilas(
-        //   doc,
-        //   "NIVEL DE ESTUDIO",
-        //   "Contenido de la segunda fila."
-        // );
-
-
-        // crearSeccionConDosFilas(
-        //   doc,
-        //   "NIVEL DE ESTUDIO",
-        //   "Contenido de la segunda fila."
-        // );
-        
-
-    currentPositionY = doc.previousAutoTable.finalY + 5; // Espacio después de la celda
+    currentPositionY = doc.previousAutoTable.finalY + 10;
 
     const tablaData5 = {
-      headers: ["Nombre", "datos"],
+      headers: ["DESCRIPCIÓN", "CANTIDAD"],
       body: [
-        ['NOMBRE (S)', 'ADRIANA'],
-        ['APELLIDO PATERNO', 'DE LOS REYES'],
-        ['APELLIDO MATERNO', 'MORENO'],
-        ['NACIONALIDAD', 'MEXICANA'],
+        ['RECUBRIMIENTOS PLÁSTICOS EN PISOS Y ESCALONES', '1'],
+        ['ALARMA CONTRA INCENDIOS Y/O TERREMOTOS', '2'],
+        ['SEÑALAMIENTOS DE EVACUACIÓN', '51'],
+        ['BOTIQUÍN', '3'],
+        ['ESCALERAS DE EMERGENCIA', '3'],
+        ['ÁREA DE SEGURIDAD', '4'],
+        ['EXTINTORES', '14'],
+        ['PUNTOS DE REUNIÓN PARA EVACUACIÓN', '2']
       ],
-      showHead: false,
-      columnStyles: {
-        0: {
-          fillColor: [172, 178, 183],
-        },
-        1: {
-          fontStyle: "bold",
-        },
-      },
     };
     
-    crearSeccionConTabla1(doc, "DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA", tablaData5, {
-      spaceBeforeTable: 7,
-      ...tablaData5, // Pasa los estilos de la tabla como parte de las opciones
-    });
-    
-    currentPositionY = doc.previousAutoTable.finalY ; // Espacio después de la celda
-
-    const headers8 = [
-      "CALLE Y NÚMERO",
-      "COLONIA",
-
-    ];
-    const tableData8 = [
-      ['47504','JALISCO']
-    ];
-    generateTable(doc, headers8, tableData8, currentPositionY , {
-      fillColor: [172, 178, 183],
-      fontSize: 12,
-      textColor: [20, 20, 20],
-
-    });
-
-    const headers6 = [
-      "CÓDIGO POSTAL",
-      "DELEGACIÓN O MUNICIPIO",
-      "ENTIDAD FEDERATIVA",
-
-    ];
-    const tableData6 = [
-      ['47504', 'LAGOS DE MORENO', 'JALISCO']
-    ];
-    generateTable(doc, headers6, tableData6, currentPositionY, {
-      fillColor: [172, 178, 183],
-      fontSize: 12,
-      textColor: [20, 20, 20],
-
-    });
-
-    currentPositionY = doc.previousAutoTable.finalY - 20;
-    
-    const headers7 = [
-      "NÚMERO TELEFÓNICO",
-      "CORREO ELECTRÓNICO",
-
-    ];
-    const tableData7 = [
-      ['4491910926,','tercercorre@gmail.com']
-    ];
-    generateTable(doc, headers7, tableData7, currentPositionY + 20, {
-      fillColor: [172, 178, 183],
-      fontSize: 12,
-      textColor: [20, 20, 20],
-
-    });
+    crearSeccionConTabla1(doc, "SISTEMA DE SEGURIDAD", tablaData5, { spaceBeforeTable: 7 });
 
     currentPositionY = doc.previousAutoTable.finalY + 10;
 
-    const tablaData9 = {
-      headers: ["NOMBRE (S)", "APELLIDO PATERNO", "APELLIDO MATERNO"],
+    const tablaData6 = {
+      headers: ["DESCRIPCIÓN", "CANTIDAD"],
       body: [
-        ['ADRIANA', 'DE LOS REYES', 'MORENO'],
+        ['SANITARIOS EXCLUSIVOS PARA EL ALUMNADO VARÓN', '0'],
+        ['SANITARIOS EXCLUSIVOS PARA EL ALUMNADO FEMENINO', '2'],
+        ['SANITARIOS EXCLUSIVOS PARA EL PERSONAL MASCULINO ADMINISTRATIVO', '1'],
+        ['SANITARIOS EXCLUSIVOS PARA EL PERSONAL FEMENINO ADMINISTRATIVO', '1'],
+        ['PERSONAS ENCARGADAS DE LA LIMPIEZA', '2'],
+        ['CESTOS DE BASURA', '23'],
+        ['NÚMERO DE AULAS EN EL PLANTEL', '4'],
+        ['BUTACAS POR AULA', '14'],
+        ['VENTANAS QUE PUEDEN ABRIRSE POR AULA', '2'],
+        ['NÚMERO DE VENTILADORES EN TODO EL PLANTEL', '1'],
+        ['NÚMERO DE AIRES ACONDICIONADOS EN TODO EL PLANTEL', '0']
       ],
     };
     
-    crearSeccionConTabla1(doc, "DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA", tablaData9, {
-      spaceBeforeTable: 7,
-      ...tablaData9, // Pasa los estilos de la tabla como parte de las opciones
-    });
-    
-    currentPositionY = doc.previousAutoTable.finalY ;
-
-    const headers10 = [
-      "CORREO INSTITUCIONAL",
-      "CORREO PERSONAL",
-      "TELÉFONO CELULAR",
-
-    ];
-    const tableData10 = [
-      ['primercorreo@hotmail.com','tercercorre@gmail.com', '234131313123']
-    ];
-    generateTable(doc, headers10, tableData10, currentPositionY, {
-      fillColor: [172, 178, 183],
-      fontSize: 12,
-      textColor: [20, 20, 20],
-
-    });
+    crearSeccionConTabla1(doc, "4. HIGIENE DEL PLANTEL", tablaData6, { spaceBeforeTable: 7 });
 
     currentPositionY = doc.previousAutoTable.finalY + 10;
 
-    const tablaData11 = {
-      headers: ["GRADO EDUCATIVO", "NOMBRE DE LOS ESTUDIOS"],
-      body: [
-        ['LICENCIATURA','MEDIOS MASIVOS DE COMUNICACIÓN'],
-      ],
-    };
-    
-    crearSeccionConTabla1(doc, "FORMACIÓN ACADÉMICA", tablaData11, {
-      spaceBeforeTable: 7,
-      ...tablaData11, // Pasa los estilos de la tabla como parte de las opciones
-    });
-
-    currentPositionY = doc.previousAutoTable.finalY ;
-
-    const headers12 = [
-      "NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA",
-      "DOCUMENTO QUE ACREDITA SUS ESTUDIOS",
+    const headers = [
+      "Alumnos",
+      "Fechas",
+      "Programa de estudios",
+      "Acciones",
     ];
-    const tableData12 = [
-      ['UNIVERSIDAD AUTÓNOMA DE AGUASCALIENTES','TÍTULO']
-    ];
-    generateTable(doc, headers12, tableData12, currentPositionY, {
-      fillColor: [172, 178, 183],
-      fontSize: 12,
-      textColor: [20, 20, 20],
+    const tableData = datos.map((dato) => [
+      dato.alumno,
+      dato.fechas,
+      dato.plan_de_estudios,
+      dato.acciones,
+    ]);
 
+    generateTable(doc, headers, tableData, 500, {
+      fillColor: [241, 196, 15],
+      fontSize: 15,
     });
 
-    currentPositionY = doc.previousAutoTable.finalY + 5; // Espacio después de la celda
-
-    const tablaData13 = {
-      headers: ["Nombre", "datos"],
-      body: [
-        ['NOMBRE COMPLETO', 'ANA FERNANDA NAVARRO GONZÁLEZ'],
-        ['CARGO', 'VOCAL ACADÉMICA'],
-        ['NÚMERO TELEFÓNICO ', '4747466124, 3787900984'],
-        ['CORREO ELECTRÓNICO', 'primer@gmail.com'],
-        ['HORARIO DE ATENCIÓN', '9 A 14 Y DE 16 A 19 HORAS'],
-      ],
-      showHead: false,
-      columnStyles: {
-        0: {
-          fillColor: [172, 178, 183],
-        },
-        1: {
-          fontStyle: "bold",
-        },
-      },
-    };
-    
-    crearSeccionConTabla1(doc, "DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA", tablaData13, {
-      spaceBeforeTable: 7,
-      ...tablaData13, // Pasa los estilos de la tabla como parte de las opciones
-    });
-    
-    currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la celda
-
-    const tablaData14 = {
-      headers: ["Nombre", "datos"],
-      body: [
-        ['NOMBRE PROPUESTO No. 1', 'CENTRO EDUCATIVO EL SALTO'],
-        ['NOMBRE PROPUESTO No. 2', 'CENTRO DE FORMACIÓN EL SALTO'],
-        ['NOMBRE PROPUESTO No. 3', 'CENTRO DE EDUCACIÓN EL SALTO'],
-      ],
-      showHead: false,
-      columnStyles: {
-        0: {
-          fillColor: [172, 178, 183],
-        },
-        1: {
-          fontStyle: "bold",
-        },
-      },
-    };
-    
-    crearSeccionConTabla1(doc, "NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA", tablaData14, {
-      spaceBeforeTable: 7,
-      ...tablaData14, // Pasa los estilos de la tabla como parte de las opciones
-    });
-
-
-    currentPositionY += 30;
-
-    crearSeccion(
-      doc,
-      `                                                   BAJO PROTESTA DE DECIR VERDAD
-                                                      GUILLERMO GÓNGORA CHALITA`,
-      'left'
-    );
 
 
         const totalPages = doc.internal.getNumberOfPages();

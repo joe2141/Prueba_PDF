@@ -8,6 +8,7 @@ function Home() {
         
         <li><Link to="/FDA01">FDA01</Link></li>
         <li><Link to="/FDA02">FDA02</Link></li>
+        <li><Link to="/FDA04">FDA04</Link></li>
 
         <li><Link to="/FDP02">FDP02</Link></li>
       </ul>

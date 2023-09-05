@@ -186,6 +186,67 @@ function FDA02() {
 
 
 
+function crearSeccionConTabla2(doc, tituloSuperior, subtituloSuperior, tablaData, tableOptions = {}) {
+  const margenSuperior = currentPositionY;
+
+  // Celdas superiores
+  doc.setFillColor(172, 178, 183); // Color gris
+  crearCelda(
+    doc,
+    14, // cellX
+    currentPositionY, // cellY
+    182, // cellWidth
+    7, // cellHeight
+    tituloSuperior
+  );
+
+  const startY = currentPositionY + (tableOptions.spaceBeforeTable || 5);
+
+  doc.setFillColor(172, 178, 183); // Color gris
+  crearCelda(
+    doc,
+    14, // cellX
+    startY, // cellY
+    182, // cellWidth
+    7, // cellHeight
+    subtituloSuperior
+  );
+
+  const textHeightTitulo = doc.getTextDimensions(tituloSuperior, { align: 'justify', maxWidth: 175 }).h;
+  const textHeightSubtitulo = doc.getTextDimensions(subtituloSuperior, { align: 'justify', maxWidth: 175 }).h;
+
+  const textHeightTotal = textHeightTitulo + textHeightSubtitulo;
+
+  if (currentPositionY + textHeightTotal + 25 > doc.internal.pageSize.height - 20) {
+    doc.addPage();
+    currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+  }
+
+  doc.autoTable({
+    startY: startY + textHeightTotal ,
+    head: [tablaData.headers], // Encabezados de la tabla
+    body: tablaData.body, // Datos de la tabla
+    theme: "grid",
+    styles: {
+      lineColor: [0, 0, 0],
+      lineWidth: 0.3,
+    },
+    headStyles: {
+      fillColor: [172, 178, 183],
+      fontSize: 12,
+      textColor: [20, 20, 20],
+    },
+    ...tableOptions, // Opciones adicionales de la tabla
+  });
+
+  const tableHeight = doc.previousAutoTable.finalY - startY - textHeightTotal - 5;
+
+  currentPositionY += tableHeight + 20; // Espacio después de la tabla
+}
+
+
+
+
 function crearSeccionConTabla(doc, primerDato) {
   const headers1 = [
     "NOMBRE DE LA INSTITUCIÓN",
@@ -458,12 +519,43 @@ function crearSeccionConTabla(doc, primerDato) {
       dato.acciones,
     ]);
 
-    generateTable(doc, headers, tableData, 500, {
-      fillColor: [241, 196, 15],
-      fontSize: 15,
-    });
+    crearSeccionConTabla2(doc, "5. INFRAESTRUCTURA PARA EL PROGRAMA", "ESPACIOS Y EQUIPAMIENTO", {
+      headers: headers,
+      body: tableData,
+    }, { spaceBeforeTable: 7 });
 
 
+    currentPositionY = doc.previousAutoTable.finalY + 10;
+
+    const tablaData7 = {
+      headers: ["DESCRIPCIÓN", "CANTIDAD"],
+      body: [
+        ['SANITARIOS EXCLUSIVOS PARA EL ALUMNADO VARÓN', '0'],
+        ['SANITARIOS EXCLUSIVOS PARA EL ALUMNADO FEMENINO', '2'],
+        ['SANITARIOS EXCLUSIVOS PARA EL PERSONAL MASCULINO ADMINISTRATIVO', '1'],
+        ['SANITARIOS EXCLUSIVOS PARA EL PERSONAL FEMENINO ADMINISTRATIVO', '1'],
+        ['PERSONAS ENCARGADAS DE LA LIMPIEZA', '2'],
+        ['CESTOS DE BASURA', '23'],
+        ['NÚMERO DE AULAS EN EL PLANTEL', '4'],
+        ['BUTACAS POR AULA', '14'],
+        ['VENTANAS QUE PUEDEN ABRIRSE POR AULA', '2'],
+        ['NÚMERO DE VENTILADORES EN TODO EL PLANTEL', '1'],
+        ['NÚMERO DE AIRES ACONDICIONADOS EN TODO EL PLANTEL', '0']
+      ],
+    };
+    
+    crearSeccionConTabla1(doc, `6. INSTITUCIONES DE SALUD ALEDAÑAS`, tablaData7, { spaceBeforeTable: 7 });
+
+    currentPositionY = doc.previousAutoTable.finalY + 10;
+
+    currentPositionY += 30;
+
+    crearSeccion(
+      doc,
+      `                                                   BAJO PROTESTA DE DECIR VERDAD
+                                                      GUILLERMO GÓNGORA CHALITA`,
+      'left'
+    );
 
         const totalPages = doc.internal.getNumberOfPages();
         for (let i = 1; i <= totalPages; i++) {

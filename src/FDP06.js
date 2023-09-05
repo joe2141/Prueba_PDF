@@ -309,57 +309,6 @@ function crearSeccionConTabla(doc, primerDato) {
   currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
 }
 
-  
-
-
-  
-  
-  function crearSeccionConDosFilas(doc, contenidoPrimeraFila, contenidoSegundaFila) {
-    const margenIzquierdo = 20;
-    const margenSuperior = currentPositionY;
-  
-    // Tamaño de celda y altura de texto
-    const celdaAncho = 35; // Ancho total
-    const celdaAlto = 10;
-    const textoAltura = 4;
-  
-    // Primera fila con fondo gris y borde
-    doc.setFillColor(172, 178, 183); // Color gris
-    doc.rect(margenIzquierdo, currentPositionY, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
-  
-    // Contenido de la primera fila
-    doc.setFont("helvetica");
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0);
-    doc.text(contenidoPrimeraFila, margenIzquierdo + 1, currentPositionY + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
-  
-    const textHeightPrimeraFila = textoAltura;
-  
-    if (currentPositionY + celdaAlto + textHeightPrimeraFila + 10 > doc.internal.pageSize.height - 20) {
-      doc.addPage();
-      currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
-    }
-  
-    // Segunda fila con fondo blanco y borde
-    doc.setFillColor(255, 255, 255); // Color blanco
-    doc.rect(margenIzquierdo, currentPositionY + celdaAlto, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
-  
-    // Contenido de la segunda fila
-    doc.setFont("helvetica");
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0);
-    doc.text(contenidoSegundaFila, margenIzquierdo + 1, currentPositionY + celdaAlto + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
-  
-    const textHeightSegundaFila = textoAltura;
-  
-    currentPositionY += celdaAlto * 2 + Math.max(textHeightPrimeraFila, textHeightSegundaFila) + 15; // Espacio después del texto
-}
-
-  
-    
-  
-
-
     async function generatePDF(datos, callback) {
       if (datos && datos.length > 0) {
         const primerDato = datos[0];

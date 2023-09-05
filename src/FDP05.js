@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
-function FDA06() {
+function FDA05() {
   useEffect(() => {
     async function fetchData() {
       const requestOptions = {
@@ -362,4 +362,4 @@ function FDA06() {
   );
 }
 
-export default FDA06;
+export default FDA05;

@@ -13,6 +13,7 @@ function Home() {
 
         <li><Link to="/FDP02">FDP02</Link></li>
         <li><Link to="/FDP05">FDP05</Link></li>
+        <li><Link to="/FDP06">FDP06</Link></li>
       </ul>
     </div>
   );

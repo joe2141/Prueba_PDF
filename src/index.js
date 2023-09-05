@@ -7,6 +7,7 @@ import FDA04 from './FDA04';
 import FDA06 from './FDA06';
 import FDP02 from './FDP02';
 import FDP05 from './FDP05';
+import FDP06 from './FDP06';
 import Home from './Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +22,7 @@ root.render(
         <Route path="/FDA06" element={<FDA06 />} />
         <Route path="/FDP02" element={<FDP02 />} />
         <Route path="/FDP05" element={<FDP05 />} />
+        <Route path="/FDP06" element={<FDP06 />} />
       </Routes>
     </Router>
   </React.StrictMode>,

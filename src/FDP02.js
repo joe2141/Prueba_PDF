@@ -106,52 +106,52 @@ function FDP02() {
 
 
   function crearSeccionConTexto(doc, titulo, contenido, segundoContenido = null) {
-  const margenSuperior = currentPositionY;
-
-  // Titulo de la sección
-  doc.setFillColor(172, 178, 183);
-  crearCelda(
-    doc,
-    20,     // cellX
-    currentPositionY, // cellY
-    176,    // cellWidth
-    7,      // cellHeight
-    titulo
-  );
-
-  const textHeightTitulo = 7; // Altura del título
-
-  const textHeightContenido = doc.getTextDimensions(contenido, { align: 'justify', maxWidth: 175 }).h;
-
-  if (currentPositionY + textHeightTitulo + textHeightContenido + 25 > doc.internal.pageSize.height - 20) {
-    doc.addPage();
-    currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
-  }
-
-  doc.setFont("helvetica");
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
-  doc.text(contenido, 20, currentPositionY + textHeightTitulo + 5, { align: 'justify', maxWidth: 175 });
-
-  currentPositionY += textHeightTitulo + textHeightContenido + 20; // Espacio después del texto
-
-  if (segundoContenido) {
-    // Si se proporciona un segundo contenido, crear una segunda celda
-    const textHeightSegundoContenido = doc.getTextDimensions(segundoContenido, { align: 'justify', maxWidth: 175 }).h;
-
-    if (currentPositionY + textHeightSegundoContenido + 20 > doc.internal.pageSize.height - 20) {
+    const margenSuperior = currentPositionY;
+  
+    // Titulo de la sección
+    doc.setFillColor(172, 178, 183);
+    crearCelda(
+      doc,
+      20,     // cellX
+      currentPositionY, // cellY
+      176,    // cellWidth
+      7,      // cellHeight
+      titulo
+    );
+  
+    const textHeightTitulo = 7; // Altura del título
+  
+    const textHeightContenido = doc.getTextDimensions(contenido, { align: 'justify', maxWidth: 175 }).h;
+  
+    if (currentPositionY + textHeightTitulo + textHeightContenido + 25 > doc.internal.pageSize.height - 20) {
       doc.addPage();
       currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
     }
-
+  
     doc.setFont("helvetica");
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text(segundoContenido, 20, currentPositionY + 5, { align: 'justify', maxWidth: 175 });
+    doc.text(contenido, 20, currentPositionY + textHeightTitulo + 5, { align: 'justify', maxWidth: 175 });
+  
+    currentPositionY += textHeightTitulo + textHeightContenido + 5; // Espacio después del texto
+  
+    if (segundoContenido) {
+      // Si se proporciona un segundo contenido, crear una segunda celda
+      const textHeightSegundoContenido = doc.getTextDimensions(segundoContenido, { align: 'justify', maxWidth: 175 }).h;
+  
+      if (currentPositionY + textHeightSegundoContenido + 20 > doc.internal.pageSize.height - 20) {
+        doc.addPage();
+        currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+      }
+  
+      doc.setFont("helvetica");
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      doc.text(segundoContenido, 20, currentPositionY + 5, { align: 'justify', maxWidth: 175 });
+  
+    }
 
-    currentPositionY += textHeightSegundoContenido + 20; // Espacio después del segundo contenido
   }
-}
 
 
 function crearSeccionConTexto2(doc, tituloSuperior, subtituloSuperior, contenido, segundoContenido = null) {
@@ -213,8 +213,6 @@ function crearSeccionConTexto2(doc, tituloSuperior, subtituloSuperior, contenido
     currentPositionY += textHeightSegundoContenido + 20; // Espacio después del segundo contenido
   }
 }
-
-
 
 
 
@@ -328,23 +326,59 @@ function crearSeccionConTabla2(doc, tituloSuperior, subtituloSuperior, tablaData
 
 
 
-function crearSeccionConTabla(doc, primerDato) {
-  const headers1 = [
-    "MODALIDAD",
-    "DURACIÓN DEL CICLO ",
-    "DURACIÓN DEL PLAN DE ESTUDIOS",
-    "CLAVE DE PLAN DE ESTUDIOS",
-  ];
-  const dataColumn1 = [
-    primerDato.modalidad,
-    primerDato.institucion,
-    primerDato.ciclo,
-    primerDato.fechas,
-  ];
+function crearSeccionCalificaciones(doc, titulo, tablaData, tableOptions = {}) {
+  const margenSuperior = currentPositionY;
 
-  const tableData1 = headers1.map((header, index) => [
+  // Titulo de la sección
+  doc.setFillColor(172, 178, 183);
+  crearCelda(
+    doc,
+    14,     // cellX
+    currentPositionY, // cellY
+    182,    // cellWidth
+    7,      // cellHeight
+    titulo
+  );
+
+  const startY = currentPositionY + (tableOptions.spaceBeforeTable || 5);
+
+const textHeight = doc.getTextDimensions(titulo, { align: 'justify', maxWidth: 175 }).h;
+
+if (currentPositionY + textHeight + 25 > doc.internal.pageSize.height - 20) {
+  doc.addPage();
+  currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+}
+
+doc.autoTable({
+  startY: startY,
+  head: [tablaData.headers], // Encabezados de la tabla
+  body: tablaData.body, // Datos de la tabla
+  theme: "grid",
+  styles: {
+    lineColor: [0, 0, 0],
+    lineWidth: 0.3,
+  },
+  headStyles: {
+    fillColor: [172, 178, 183],
+    fontSize: 9, // Modifica el tamaño de letra aquí (por ejemplo, 16 puntos)
+    textColor: [20, 20, 20],
+  },
+  ...tableOptions, // Opciones adicionales de la tabla
+});
+
+const tableHeight = doc.previousAutoTable.finalY - startY;
+
+currentPositionY += tableHeight + 20; // Espacio después de la tabla
+}
+
+
+
+
+
+function crearSeccionConTabla(doc, headers, dataColumn, opciones = {}) {
+  const tableData = headers.map((header, index) => [
     header,
-    dataColumn1[index],
+    dataColumn[index],
   ]);
 
   const tableOptions = {
@@ -369,7 +403,7 @@ function crearSeccionConTabla(doc, primerDato) {
     },
   };
 
-  const textHeight = doc.getTextDimensions(tableData1.join('\n'), tableOptions).h;
+  const textHeight = doc.getTextDimensions(tableData.join('\n'), tableOptions).h;
 
   if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
     doc.addPage();
@@ -377,61 +411,16 @@ function crearSeccionConTabla(doc, primerDato) {
   }
 
   doc.autoTable({
-    body: tableData1,
+    body: tableData,
     ...tableOptions,
   });
 
-  currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
+  currentPositionY = doc.previousAutoTable.finalY + (opciones.spaceBeforeTable || 10); // Espacio después de la tabla
 }
 
-  
 
 
-  
-  
-  function crearSeccionConDosFilas(doc, contenidoPrimeraFila, contenidoSegundaFila) {
-    const margenIzquierdo = 20;
-    const margenSuperior = currentPositionY;
-  
-    // Tamaño de celda y altura de texto
-    const celdaAncho = 35; // Ancho total
-    const celdaAlto = 10;
-    const textoAltura = 4;
-  
-    // Primera fila con fondo gris y borde
-    doc.setFillColor(172, 178, 183); // Color gris
-    doc.rect(margenIzquierdo, currentPositionY, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
-  
-    // Contenido de la primera fila
-    doc.setFont("helvetica");
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0);
-    doc.text(contenidoPrimeraFila, margenIzquierdo + 1, currentPositionY + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
-  
-    const textHeightPrimeraFila = textoAltura;
-  
-    if (currentPositionY + celdaAlto + textHeightPrimeraFila + 10 > doc.internal.pageSize.height - 20) {
-      doc.addPage();
-      currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
-    }
-  
-    // Segunda fila con fondo blanco y borde
-    doc.setFillColor(255, 255, 255); // Color blanco
-    doc.rect(margenIzquierdo, currentPositionY + celdaAlto, celdaAncho, celdaAlto, 'FD'); // Relleno y borde
-  
-    // Contenido de la segunda fila
-    doc.setFont("helvetica");
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0);
-    doc.text(contenidoSegundaFila, margenIzquierdo + 1, currentPositionY + celdaAlto + textoAltura, { align: 'left', maxWidth: celdaAncho - 1 });
-  
-    const textHeightSegundaFila = textoAltura;
-  
-    currentPositionY += celdaAlto * 2 + Math.max(textHeightPrimeraFila, textHeightSegundaFila) + 15; // Espacio después del texto
-}
 
-  
-    
   
 
 
@@ -466,7 +455,22 @@ function crearSeccionConTabla(doc, primerDato) {
                                             TÉCNICO SUPERIOR UNIVERSITARIO EN HOTELERÍA`
         );
 
-        crearSeccionConTabla(doc, primerDato);
+        const headers1 = [
+          "MODALIDAD",
+          "DURACIÓN DEL CICLO ",
+          "DURACIÓN DEL PLAN DE ESTUDIOS",
+          "CLAVE DE PLAN DE ESTUDIOS",
+        ];
+        
+        const dataColumn1 = [
+          primerDato.modalidad,
+          primerDato.institucion,
+          primerDato.ciclo,
+          primerDato.fechas,
+        ];
+        
+        crearSeccionConTabla(doc, headers1, dataColumn1, { spaceBeforeTable: 7 });
+        
 
         crearSeccionConTexto(
           doc,
@@ -500,14 +504,83 @@ crearSeccionConTexto(
   "4. PROCESO DE SELECCIÓN DE ESTUDIANTES",
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
 );
+
+
+
+
+    const headers8 = [
+      "ÁREA",
+      "ASIGNATURA O UNIDAD DE APRENDIZAJE",
+      "CLAVE",
+      "SERIACIÓN",
+      "HORAS DOCENTESERIACIÓN",
+      "HORAS INDEP.",
+      "CRÉDITOS",
+      "INSTALACIONES"
+    ];
+    const tableData8 = datos.map((dato) => [
+      dato.area,
+      dato.asignatura,
+      dato.clave,
+      dato.sericacion,
+      dato.horas_1,
+      dato.horas_2,
+      dato.creditos,
+      dato.institucion,
+    ]);
+
+    crearSeccionCalificaciones(doc, "SEGUNDO CUATRIMESTRE", {
+      headers: headers8,
+      body: tableData8,
+    }, { spaceBeforeTable: 7 });
+
+    
+    const headers2 = [
+      "TOTAL DE HORAS DE TRABAJO BAJO LA CONDUCCIÓN DE UN DOCENTE DURANTE TODA LA CARRERA",
+      "TOTAL DE HORAS DE TRABAJO DE MANERA INDEPENDIENTE DURANTE TODA LA CARRERA ",
+      "TOTAL DE CRÉDITOS DE LA CARRERA",
+    ];
+    
+    const dataColumn2 = [
+      primerDato.totalh1,
+      primerDato.totalh2,
+      primerDato.totalc,
+    ];
+    
+    crearSeccionConTabla(doc, headers2, dataColumn2, { spaceBeforeTable: 7 });
+
+
+    crearSeccionConTexto(
+  doc,
+  "11. LÍNEAS DE GENERACIÓN Y/O APLICACIÓN DEL CONOCIMIENTO:",
+  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+);
+
+crearSeccionConTexto(
+  doc,
+  "12. ACTUALIZACIÓN DEL PLAN DE ESTUDIOS:",
+  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+);
         
 
     currentPositionY += 30;
 
     crearSeccion(
       doc,
-      `                                                   BAJO PROTESTA DE DECIR VERDAD
-                                                      GUILLERMO GÓNGORA CHALITA`,
+      `                                                   FECHA DE AUTORIZACIÓN`,
+      'left'
+    );
+
+    currentPositionY += 30;
+
+    crearSeccion(
+      doc,
+      `                                                   ING. MARCO ARTURO CASTRO AGUILERA
+      
+                                                          DIRECTOR GENERAL DE
+                                                          INCORPORACIÓN Y SERVICIOS
+                                                          ESCOLARES
+      `,
       'left'
     );
 

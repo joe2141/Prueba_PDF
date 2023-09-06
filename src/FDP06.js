@@ -345,7 +345,7 @@ function crearSeccionConTabla(doc, primerDato) {
       dato.acciones,
     ]);
 
-    crearSeccionConTabla2(doc, "5. INFRAESTRUCTURA PARA EL PROGRAMA", "ESPACIOS Y EQUIPAMIENTO", {
+    crearSeccionConTabla1(doc, "PRIMER CUATRIMESTRE", {
       headers: headers7,
       body: tableData7,
     }, { spaceBeforeTable: 7 });

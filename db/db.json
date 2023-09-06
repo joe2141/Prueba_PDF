@@ -10,7 +10,16 @@
             "institucion": "CENTRO UNIVERSITARIO UNE",
             "alumno": "Fer",
             "fechas": "27 DE ABRIL DEL 2023",
-            "ciclo": "UNO",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
+            "totalh1": "1962 horas",
+            "totalh2": "1078 horas",
+            "totalc": "190 creditos",
             "acciones": "El plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivosEl plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
         },
         {
@@ -23,7 +32,15 @@
             "turno": "MATUTINO, VESPERTINO",
             "institucion": "CENTRO UNIVERSITARIO UNE",
             "alumno": "lalo",
-            "fechas": "12/12/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
+
             "acciones": "El plan de estudios se compone de una serie de objetivos, metodologías y criterios de evaluación, que permiten establecer los conocimientos y habilidades que se deben adquirir durante el proceso educativo y asegurarse de que los alumnos cumplan con los requisitos para la obtención de la titulación."
         },
         {
@@ -36,7 +53,14 @@
             "turno": "MATUTINO",
             "institucion": "UNIVERSIDAD MÉDICA",
             "alumno": "Ana",
-            "fechas": "15/07/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "El plan de estudios de medicina se enfoca en brindar los conocimientos y habilidades necesarias para convertirse en un profesional de la salud capacitado para diagnosticar y tratar diversas condiciones médicas."
         },
         {
@@ -49,7 +73,14 @@
             "turno": "VESPERTINO",
             "institucion": "COLEGIO TECNOLÓGICO",
             "alumno": "Juan",
-            "fechas": "10/09/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "La solicitud de beca tiene como objetivo apoyar financieramente a estudiantes con un desempeño académico destacado para que puedan continuar sus estudios sin dificultades económicas."
         },
         {
@@ -62,7 +93,14 @@
             "turno": "MATUTINO",
             "institucion": "ESCUELA PRIMARIA SOL",
             "alumno": "María",
-            "fechas": "25/06/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "La inscripción es el proceso por el cual los estudiantes se registran oficialmente en una institución educativa para comenzar su educación formal en un nivel específico."
         },
         {
@@ -75,7 +113,14 @@
             "turno": "MATUTINO",
             "institucion": "COLEGIO JUVENIL",
             "alumno": "Carlos",
-            "fechas": "02/11/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "La revalidación de materias permite a los estudiantes transferir créditos de cursos ya completados en otra institución, evitando la repetición de contenido similar y agilizando su avance académico."
         },
         {
@@ -88,7 +133,14 @@
             "turno": "VESPERTINO",
             "institucion": "PREPARATORIA LIBERTAD",
             "alumno": "Miguel",
-            "fechas": "18/05/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "Una constancia es un documento oficial que certifica la participación o logros de un estudiante en una actividad académica, deportiva, cultural u otra similar."
         },
         {
@@ -101,7 +153,14 @@
             "turno": "NOCTURNO",
             "institucion": "UNIVERSIDAD TÉCNICA",
             "alumno": "Andrea",
-            "fechas": "30/04/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "El cambio de carrera permite a los estudiantes cambiar su campo de estudio principal para adaptarse mejor a sus intereses y objetivos académicos y profesionales."
         },
         {
@@ -114,7 +173,14 @@
             "turno": "MATUTINO",
             "institucion": "INSTITUTO TECNOLÓGICO",
             "alumno": "Laura",
-            "fechas": "07/08/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "Las prácticas profesionales son una parte integral de muchos programas técnicos y universitarios, permitiendo a los estudiantes ganar experiencia práctica en su campo de estudio antes de graduarse."
         },
         {
@@ -127,7 +193,14 @@
             "turno": "VESPERTINO",
             "institucion": "UNIVERSIDAD VIRTUAL",
             "alumno": "Elena",
-            "fechas": "03/06/23",
+            "fechas": "27 DE ABRIL DEL 2023",
+            "area": "Formación Disciplinar",
+            "asignatura": "asignatura 1",
+            "clave":"101",
+            "seriacion":"101",
+            "horas_1": "54",
+            "horas_2": "13",
+            "creditos": "5",
             "acciones": "El cambio de modalidad implica cambiar la forma en que se llevan a cabo los estudios, pasando de la educación presencial a la educación en línea o viceversa."
         }
         

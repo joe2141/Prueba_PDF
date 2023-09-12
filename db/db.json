@@ -1,4 +1,8 @@
 {
+    "semestres":[{
+        "n_semestres": 8
+    }],
+    
     "alumnos":[{
             "id":"01",
             "tipo_de_solicitud":"CAMBIO DE DOMICILIO",

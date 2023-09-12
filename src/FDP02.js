@@ -323,53 +323,100 @@ function crearSeccionConTabla2(doc, tituloSuperior, subtituloSuperior, tablaData
   currentPositionY += tableHeight + 20; // Espacio después de la tabla
 }
 
+function crearCelda1(doc, cellX, cellY, cellWidth, cellHeight, contenido, opciones = {}) {
+  // Establecer el color de fondo antes de dibujar el rectángulo
+  doc.setFillColor.apply(this, opciones.fillColor || [255, 255, 255]);
+  doc.rect(cellX, cellY, cellWidth, cellHeight, 'F'); // 'F' indica que se debe llenar el rectángulo
 
+  // Establecer los estilos de línea después de dibujar el rectángulo
+  doc.setDrawColor.apply(this, opciones.lineColor || [0, 0, 0]);
+  doc.setLineWidth(opciones.lineWidth || 0.3);
+  doc.rect(cellX, cellY, cellWidth, cellHeight); // Agregar borde alrededor del rectángulo
+
+  doc.text(contenido, cellX + 2, cellY + 2, { align: 'left', valign: 'middle', baseline: 'middle' });
+}
 
 
 function crearSeccionCalificaciones(doc, titulo, tablaData, tableOptions = {}) {
   const margenSuperior = currentPositionY;
 
-  // Titulo de la sección
-  doc.setFillColor(172, 178, 183);
-  crearCelda(
-    doc,
-    14,     // cellX
-    currentPositionY, // cellY
-    182,    // cellWidth
-    7,      // cellHeight
-    titulo
-  );
-
   const startY = currentPositionY + (tableOptions.spaceBeforeTable || 5);
 
-const textHeight = doc.getTextDimensions(titulo, { align: 'justify', maxWidth: 175 }).h;
+  const textHeight = doc.getTextDimensions(titulo, { align: 'justify', maxWidth: 175 }).h;
 
-if (currentPositionY + textHeight + 25 > doc.internal.pageSize.height - 20) {
-  doc.addPage();
-  currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+  if (currentPositionY + textHeight + 25 > doc.internal.pageSize.height - 20) {
+    doc.addPage();
+    currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+  }
+
+  // Crear la tabla de datos
+  doc.autoTable({
+    startY: startY,
+    head: [
+      tablaData.headers.map(header => ({ content: header, styles: { columnWidth: 30 } })),
+      // Puedes ajustar el valor de 'columnWidth' según tus necesidades para cada columna
+    ],
+    body: tablaData.body,
+    theme: "grid",
+    styles: {
+      lineColor: [0, 0, 0],
+      lineWidth: 0.3,
+    },
+    headStyles: {
+      fillColor: [172, 178, 183],
+      fontSize: 9,
+      textColor: [20, 20, 20],
+    },
+    ...tableOptions,
+  });
+
+  const tableHeight = doc.previousAutoTable.finalY - startY;
+
+  currentPositionY += tableHeight + 7; // Espacio después de la tabla
+
+ 
+const cellHeight = 8; // Alto de la celda
+
+// Columna 1
+crearCelda1(
+  doc,
+  109.4, // cellX
+  currentPositionY, // cellY
+  21.4, // cellWidth (ejemplo de ancho diferente)
+  cellHeight, // cellHeight
+  "15",
+  { fillColor: [172, 178, 183], lineColor: [0, 0, 0], lineWidth: 0.3 } // Establecer el color de fondo y otros estilos
+);
+
+// Columna 2
+crearCelda1(
+  doc,
+  130.3, // cellX (ajusta el valor según sea necesario)
+  currentPositionY, // cellY
+  15, // cellWidth (ejemplo de ancho diferente)
+  cellHeight, // cellHeight
+  "25",
+  { fillColor: [172, 178, 183], lineColor: [0, 0, 0], lineWidth: 0.3 } // Establecer el color de fondo y otros estilos
+);
+
+// Columna 3
+crearCelda1(
+  doc,
+  145.2, // cellX (ajusta el valor según sea necesario)
+  currentPositionY, // cellY
+  20, // cellWidth (ejemplo de ancho diferente)
+  cellHeight, // cellHeight
+  "30",
+  { fillColor: [172, 178, 183], lineColor: [0, 0, 0], lineWidth: 0.3 } // Establecer el color de fondo y otros estilos
+);
+
+  currentPositionY += cellHeight + 10; // Espacio después de las celdas
 }
 
-doc.autoTable({
-  startY: startY,
-  head: [tablaData.headers], // Encabezados de la tabla
-  body: tablaData.body, // Datos de la tabla
-  theme: "grid",
-  styles: {
-    lineColor: [0, 0, 0],
-    lineWidth: 0.3,
-  },
-  headStyles: {
-    fillColor: [172, 178, 183],
-    fontSize: 9, // Modifica el tamaño de letra aquí (por ejemplo, 16 puntos)
-    textColor: [20, 20, 20],
-  },
-  ...tableOptions, // Opciones adicionales de la tabla
-});
 
-const tableHeight = doc.previousAutoTable.finalY - startY;
 
-currentPositionY += tableHeight + 20; // Espacio después de la tabla
-}
+
+
 
 
 
@@ -449,61 +496,61 @@ function crearSeccionConTabla(doc, headers, dataColumn, opciones = {}) {
 
 
         
-        crearSeccion(
-          doc,
-          `                                               CENTRO EDUCATIVO EL SALTO                                                       
-                                            TÉCNICO SUPERIOR UNIVERSITARIO EN HOTELERÍA`
-        );
+//         crearSeccion(
+//           doc,
+//           `                                               CENTRO EDUCATIVO EL SALTO                                                       
+//                                             TÉCNICO SUPERIOR UNIVERSITARIO EN HOTELERÍA`
+//         );
 
-        const headers1 = [
-          "MODALIDAD",
-          "DURACIÓN DEL CICLO ",
-          "DURACIÓN DEL PLAN DE ESTUDIOS",
-          "CLAVE DE PLAN DE ESTUDIOS",
-        ];
+//         const headers1 = [
+//           "MODALIDAD",
+//           "DURACIÓN DEL CICLO ",
+//           "DURACIÓN DEL PLAN DE ESTUDIOS",
+//           "CLAVE DE PLAN DE ESTUDIOS",
+//         ];
         
-        const dataColumn1 = [
-          primerDato.modalidad,
-          primerDato.institucion,
-          primerDato.ciclo,
-          primerDato.fechas,
-        ];
+//         const dataColumn1 = [
+//           primerDato.modalidad,
+//           primerDato.institucion,
+//           primerDato.ciclo,
+//           primerDato.fechas,
+//         ];
         
-        crearSeccionConTabla(doc, headers1, dataColumn1, { spaceBeforeTable: 7 });
+//         crearSeccionConTabla(doc, headers1, dataColumn1, { spaceBeforeTable: 7 });
         
 
-        crearSeccionConTexto(
-          doc,
-          "1. ANTECEDENTES ACADÉMICOS DE INGRESO",
-          `bachillerato`
-        );
+//         crearSeccionConTexto(
+//           doc,
+//           "1. ANTECEDENTES ACADÉMICOS DE INGRESO",
+//           `bachillerato`
+//         );
 
-        crearSeccionConTexto2(
-  doc,
-  '3. PERFIL DE INGRESO',
-  'Conocimientos:',
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-);
+//         crearSeccionConTexto2(
+//   doc,
+//   '3. PERFIL DE INGRESO',
+//   'Conocimientos:',
+//   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+// );
 
-currentPositionY += 10;
+// currentPositionY += 10;
 
-crearSeccionConTexto(
-  doc,
-  "Habilidades:",
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-);
+// crearSeccionConTexto(
+//   doc,
+//   "Habilidades:",
+//   `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+// );
 
-crearSeccionConTexto(
-  doc,
-  "Actitudes:",
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-);
+// crearSeccionConTexto(
+//   doc,
+//   "Actitudes:",
+//   `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+// );
 
-crearSeccionConTexto(
-  doc,
-  "4. PROCESO DE SELECCIÓN DE ESTUDIANTES",
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
-);
+// crearSeccionConTexto(
+//   doc,
+//   "4. PROCESO DE SELECCIÓN DE ESTUDIANTES",
+//   `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
+// );
 
 
 
@@ -513,7 +560,7 @@ crearSeccionConTexto(
       "ASIGNATURA O UNIDAD DE APRENDIZAJE",
       "CLAVE",
       "SERIACIÓN",
-      "HORAS DOCENTESERIACIÓN",
+      "HORAS DOCENTES",
       "HORAS INDEP.",
       "CRÉDITOS",
       "INSTALACIONES"
